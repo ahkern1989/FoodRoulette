@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.jk.foodroulette.tools.Helper;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int CAM_REQUEST = 1313;
     Button btn_camera;
     ImageView iv_camera;
+    Helper myHelper = new Helper(MainActivity.this, this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
             if (data != null) {
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
                 //iv_camera.setImageBitmap(thumbnail);
-                saveBitmapFile(thumbnail);
-                loadImageFromStorage();
+                Helper.saveBitmapFile(thumbnail);
+                //saveBitmapFile(thumbnail);
+                Bitmap b = Helper.loadBitmap("1");
+                iv_camera.setImageBitmap(b);
+                //loadImageFromStorage();
             }
         }
     }
